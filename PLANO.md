@@ -205,7 +205,7 @@ on_lsa(pkt, remetente=addr[0]):
 | `custo <ip> <n>` | altera custo (1–65535), LSA imediato; gravar no `roteadores.txt` para manter consistência |
 | `add <ip> <custo>` | **(novo: obrigatório gravar)** adiciona vizinho e atualiza `roteadores.txt`; ativa só quando o outro lado também configurar |
 | `del <ip>` | **(novo)** remove vizinho, atualiza `roteadores.txt`, derruba vizinhança, novo LSA |
-| `send <ip> <msg> [ttl]` | envia DATA (TTL 0–255, padrão 16) |
+| `send <ip> [ttl=N] <msg>` | envia DATA (TTL 0–255, padrão 16) |
 | `replay <vizinho> <origem> dup` | **(novo)** reenvia ao vizinho o LSA armazenado de `<origem>` com a **sequência original** (duplicado) |
 | `replay <vizinho> <origem> old [seq]` | **(novo)** idem com **sequência menor** (padrão `seq-1`, mesmos enlaces) |
 | `help`, `sair` | — |
@@ -248,7 +248,7 @@ Alternativa: Docker com rede bridge (um container por roteador).
 ```
 - `R1→R3 = 5`, `R3→R1 = 7` → **custo assimétrico**.
 - R1→R4: via R2 = 12, via R3 = 12 → **empate** (mostra a regra de desempate).
-- R1→R5: via R2-R4 = 16 (2 intermediários); via R3 = 18.
+- R1→R5: via R2-R4 = 16 e via R3-R4 = 16 → **outro empate** (2 intermediários em ambos); via R3 direto = 18.
 
 `roteadores.txt` de R1:
 ```
@@ -276,7 +276,7 @@ Para cada cenário: **comportamento esperado, resultado observado, LSAs relevant
 | E | Recuperação | Reiniciar R4 / `up` no enlace | seq de R4 continua do `seq.txt` (ex.: 23 → 24); nova vizinhança; rotas voltam. Opcional: mostrar o que acontece sem `seq.txt` (descartado como antigo) |
 | F | LSAs antigos e duplicados | `replay 192.168.1.2 192.168.1.5 dup` e `replay 192.168.1.2 192.168.1.5 old` em R1; também acontece naturalmente no ciclo R1-R2-R4-R3; e o próprio LSA voltando | `LSA_DESCARTADO … DUPLICADO/ANTIGO/PRÓPRIO`, sem flood, validade não renovada (idade continua subindo na `lsdb`) |
 | G | Alteração de custo | `custo 192.168.1.2 1` em R1 | LSA imediato, Dijkstra, `[ALTERADA]` R1→R4 vira 3 via R2 e R1→R5 vira 7 |
-| H | TTL insuficiente | Em R1: `send 192.168.1.5 teste 1` (morre em R4) e `send 192.168.1.5 teste 0` (morre em R2); comparar com TTL 2 (chega) | log `DATA_DESCARTADA … TTL esgotado` no roteador certo; captura mostrando o TTL em cada salto |
+| H | TTL insuficiente | Em R1: `send 192.168.1.5 ttl=1 teste` (morre em R4) e `send 192.168.1.5 ttl=0 teste` (morre no 1º salto, R2 ou R3); comparar com `ttl=2` (chega) | log `DATA_DESCARTADA … TTL esgotado` no roteador certo; captura mostrando o TTL em cada salto |
 
 ### Wireshark
 - Filtro: `udp.port == 6000`.

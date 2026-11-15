@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.tmp
+seq.txt
+router.log
+.DS_Store
