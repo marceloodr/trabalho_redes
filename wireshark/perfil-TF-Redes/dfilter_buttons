@@ -1,0 +1,4 @@
+"TRUE","HELLO","linkstate.tipo == \"HELLO\"",""
+"TRUE","LSA","linkstate.tipo == \"LSA\"",""
+"TRUE","DATA","linkstate.tipo == \"DATA\"",""
+"TRUE","Porta 6000","udp.port == 6000",""

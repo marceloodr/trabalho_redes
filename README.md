@@ -70,6 +70,25 @@ No Linux, todo o bloco `127.0.0.0/8` já funciona sem configurar nada. Depois, c
 python3 src/main.py --ip 127.0.0.2 --dir /tmp/r2
 ```
 
+## Cenários com captura do Wireshark e relatório
+
+```bash
+sudo bash scripts/preparar_mac.sh     # uma vez por boot: IPs 127.0.0.2–6 + ChmodBPF (captura sem root)
+python3 scripts/cenarios.py           # ~3 min: roda A–H com 6 processos reais e captura com o dumpcap
+python3 scripts/gerar_relatorio.py    # relatorio/relatorio.html e relatorio.pdf (PDF precisa de: pip install weasyprint)
+```
+
+- `capturas/<cenário>_*.pcapng` – uma captura por cenário (UDP 6000 na interface de loopback).
+- `resultados/<cenário>/` – saídas de `lsdb`/`rotas`/`vizinhos` em cada etapa e o log de cada roteador recortado por cenário; `resultados/cronologia.txt` tem a hora de cada comando.
+- `relatorio/integrantes.txt` – um nome por linha (vai para a capa do relatório).
+
+### Wireshark
+
+`wireshark/linkstate.lua` é um dissector que mostra cada datagrama como HELLO, LSA ou DATA, com os campos separados
+(filtros `linkstate.tipo == "LSA"`, `linkstate.seq`, `linkstate.ttl`, ...). `bash wireshark/instalar_perfil.sh` instala o
+dissector e o perfil **TF-Redes** (HELLO azul, LSA verde, DATA laranja, botões de filtro). No Wireshark: canto inferior
+direito → Profile → TF-Redes. Para capturar no laboratório: interface da rede, filtro de captura `udp port 6000`.
+
 ## Organização do código
 
 ```

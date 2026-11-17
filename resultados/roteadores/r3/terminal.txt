@@ -1,0 +1,620 @@
+Roteador 127.0.0.3 – UDP 6000 – pasta /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r3
+Log completo em /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r3/router.log. Digite help para os comandos.
+21:07:09.792 | ROTEADOR_INICIADO | 127.0.0.3 | vizinhos configurados: ['127.0.0.1', '127.0.0.4', '127.0.0.5'] | último SEQ gravado=0
+21:07:09.792 | LSA_GERADO | 127.0.0.3 | SEQ=1 | inicialização | #127.0.0.3;1
+21:07:09.792 | LSDB_ATUALIZADA | 127.0.0.3 | LSA local: nova origem
+21:07:09.792 | DIJKSTRA_EXECUTADO | 1 nós na LSDB | 0 rotas
+> 21:07:09.793 | VIZINHO_ATIVO | 127.0.0.1 | custo 7
+21:07:09.793 | LSA_GERADO | 127.0.0.3 | SEQ=2 | vizinhança com 127.0.0.1 estabelecida | #127.0.0.3;2*127.0.0.1;7
+21:07:09.793 | LSDB_ATUALIZADA | 127.0.0.3 | LSA local: enlaces alterados
+21:07:09.793 | DIJKSTRA_EXECUTADO | 1 nós na LSDB | 0 rotas
+21:07:09.793 | LSDB_SINCRONIZADA | 127.0.0.1 | 1 LSAs enviados ao novo vizinho
+21:07:09.793 | LSA_ACEITO | 127.0.0.1 | SEQ=3 | via 127.0.0.1 | #127.0.0.1;3*127.0.0.2;10*127.0.0.3;5
+21:07:09.793 | LSDB_ATUALIZADA | 127.0.0.1 | nova origem
+21:07:09.793 | DIJKSTRA_EXECUTADO | 2 nós na LSDB | 1 rotas
+21:07:09.793 | ROTA_NOVA | 127.0.0.1 | custo 7 via 127.0.0.1
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1         [NOVA]
+
+21:07:09.793 | LSA_ACEITO | 127.0.0.2 | SEQ=2 | via 127.0.0.1 | #127.0.0.2;2*127.0.0.1;10
+21:07:09.793 | LSDB_ATUALIZADA | 127.0.0.2 | nova origem
+21:07:09.793 | DIJKSTRA_EXECUTADO | 3 nós na LSDB | 2 rotas
+21:07:09.794 | ROTA_NOVA | 127.0.0.2 | custo 17 via 127.0.0.1
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1         [NOVA]
+
+21:07:10.118 | VIZINHO_ATIVO | 127.0.0.4 | custo 7
+21:07:10.120 | LSA_GERADO | 127.0.0.3 | SEQ=3 | vizinhança com 127.0.0.4 estabelecida | #127.0.0.3;3*127.0.0.1;7*127.0.0.4;7
+21:07:10.120 | LSDB_ATUALIZADA | 127.0.0.3 | LSA local: enlaces alterados
+21:07:10.120 | DIJKSTRA_EXECUTADO | 3 nós na LSDB | 2 rotas
+21:07:10.120 | LSDB_SINCRONIZADA | 127.0.0.4 | 3 LSAs enviados ao novo vizinho
+21:07:10.120 | LSA_ACEITO | 127.0.0.2 | SEQ=3 | via 127.0.0.1 | #127.0.0.2;3*127.0.0.1;10*127.0.0.4;2
+21:07:10.120 | LSDB_ATUALIZADA | 127.0.0.2 | enlaces alterados
+21:07:10.120 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=3 | para 127.0.0.4
+21:07:10.120 | DIJKSTRA_EXECUTADO | 3 nós na LSDB | 2 rotas
+21:07:10.120 | LSA_ACEITO | 127.0.0.4 | SEQ=3 | via 127.0.0.4 | #127.0.0.4;3*127.0.0.2;2*127.0.0.3;7
+21:07:10.120 | LSDB_ATUALIZADA | 127.0.0.4 | nova origem
+21:07:10.120 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=3 | para 127.0.0.1
+21:07:10.120 | DIJKSTRA_EXECUTADO | 4 nós na LSDB | 3 rotas
+21:07:10.121 | ROTA_ALTERADA | 127.0.0.2 | custo 17->9 | via 127.0.0.1->127.0.0.4
+21:07:10.121 | ROTA_NOVA | 127.0.0.4 | custo 7 via 127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4         [ALTERADA: antes custo 17 via 127.0.0.1]
+  127.0.0.4                  7   127.0.0.4         [NOVA]
+
+21:07:10.121 | LSA_DESCARTADO | 127.0.0.2 | SEQ=3 | duplicado (maior SEQ aceito=3) via 127.0.0.4
+21:07:10.121 | LSA_DESCARTADO | 127.0.0.1 | SEQ=3 | duplicado (maior SEQ aceito=3) via 127.0.0.4
+21:07:10.121 | LSA_DESCARTADO | 127.0.0.4 | SEQ=2 | antigo (maior SEQ aceito=3) via 127.0.0.1
+21:07:10.121 | LSA_DESCARTADO | 127.0.0.3 | SEQ=2 | LSA com o próprio IP de origem (via 127.0.0.4)
+21:07:10.121 | LSA_DESCARTADO | 127.0.0.4 | SEQ=3 | duplicado (maior SEQ aceito=3) via 127.0.0.1
+21:07:10.396 | VIZINHO_ATIVO | 127.0.0.5 | custo 13
+21:07:10.396 | LSA_GERADO | 127.0.0.3 | SEQ=4 | vizinhança com 127.0.0.5 estabelecida | #127.0.0.3;4*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:07:10.396 | LSDB_ATUALIZADA | 127.0.0.3 | LSA local: enlaces alterados
+21:07:10.396 | DIJKSTRA_EXECUTADO | 4 nós na LSDB | 3 rotas
+21:07:10.396 | LSDB_SINCRONIZADA | 127.0.0.5 | 4 LSAs enviados ao novo vizinho
+21:07:10.396 | LSA_ACEITO | 127.0.0.5 | SEQ=2 | via 127.0.0.5 | #127.0.0.5;2*127.0.0.3;13
+21:07:10.396 | LSDB_ATUALIZADA | 127.0.0.5 | nova origem
+21:07:10.396 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=2 | para 127.0.0.1, 127.0.0.4
+21:07:10.397 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:07:10.397 | ROTA_NOVA | 127.0.0.5 | custo 13 via 127.0.0.5
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 13   127.0.0.5         [NOVA]
+
+21:07:10.397 | LSA_ACEITO | 127.0.0.4 | SEQ=4 | via 127.0.0.4 | #127.0.0.4;4*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4
+21:07:10.397 | LSDB_ATUALIZADA | 127.0.0.4 | enlaces alterados
+21:07:10.397 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=4 | para 127.0.0.1, 127.0.0.5
+21:07:10.397 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:07:10.397 | LSA_ACEITO | 127.0.0.5 | SEQ=3 | via 127.0.0.5 | #127.0.0.5;3*127.0.0.3;13*127.0.0.4;4
+21:07:10.397 | LSDB_ATUALIZADA | 127.0.0.5 | enlaces alterados
+21:07:10.397 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=3 | para 127.0.0.1, 127.0.0.4
+21:07:10.397 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:07:10.397 | ROTA_ALTERADA | 127.0.0.5 | custo 13->11 | via 127.0.0.5->127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4         [ALTERADA: antes custo 13 via 127.0.0.5]
+
+21:07:10.397 | LSA_DESCARTADO | 127.0.0.5 | SEQ=3 | duplicado (maior SEQ aceito=3) via 127.0.0.4
+21:07:10.397 | LSA_DESCARTADO | 127.0.0.4 | SEQ=4 | duplicado (maior SEQ aceito=4) via 127.0.0.5
+
+VIZINHOS (IP local 127.0.0.3)
+  Vizinho           Custo  Enlace      Estado   Último HELLO
+  ---------------- ------  ----------- -------- ------------
+  127.0.0.1             7  ativado     ATIVO          há 2 s
+  127.0.0.4             7  ativado     ATIVO          há 1 s
+  127.0.0.5            13  ativado     ATIVO          há 1 s
+
+> 
+TABELA DE ROTEAMENTO
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+
+> 21:07:20.254 | LSA_ACEITO | 127.0.0.1 | SEQ=4 | via 127.0.0.1 | #127.0.0.1;4*127.0.0.2;10*127.0.0.3;5
+21:07:20.254 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=4 | para 127.0.0.4, 127.0.0.5
+21:07:20.471 | LSA_ACEITO | 127.0.0.5 | SEQ=4 | via 127.0.0.5 | #127.0.0.5;4*127.0.0.3;13*127.0.0.4;4
+21:07:20.471 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=4 | para 127.0.0.1, 127.0.0.4
+21:07:20.471 | LSA_DESCARTADO | 127.0.0.5 | SEQ=4 | duplicado (maior SEQ aceito=4) via 127.0.0.4
+21:07:20.587 | LSA_ACEITO | 127.0.0.2 | SEQ=4 | via 127.0.0.4 | #127.0.0.2;4*127.0.0.1;10*127.0.0.4;2
+21:07:20.587 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=4 | para 127.0.0.1, 127.0.0.5
+21:07:20.587 | LSA_DESCARTADO | 127.0.0.2 | SEQ=4 | duplicado (maior SEQ aceito=4) via 127.0.0.1
+21:07:20.587 | LSA_DESCARTADO | 127.0.0.2 | SEQ=4 | duplicado (maior SEQ aceito=4) via 127.0.0.5
+21:07:20.685 | LSA_ACEITO | 127.0.0.4 | SEQ=5 | via 127.0.0.4 | #127.0.0.4;5*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4
+21:07:20.685 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=5 | para 127.0.0.1, 127.0.0.5
+21:07:20.686 | LSA_DESCARTADO | 127.0.0.4 | SEQ=5 | duplicado (maior SEQ aceito=5) via 127.0.0.5
+21:07:20.871 | LSA_GERADO | 127.0.0.3 | SEQ=5 | renovação periódica | #127.0.0.3;5*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:07:30.327 | LSA_ACEITO | 127.0.0.1 | SEQ=5 | via 127.0.0.1 | #127.0.0.1;5*127.0.0.2;10*127.0.0.3;5
+21:07:30.328 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=5 | para 127.0.0.4, 127.0.0.5
+21:07:30.328 | LSA_DESCARTADO | 127.0.0.1 | SEQ=5 | duplicado (maior SEQ aceito=5) via 127.0.0.4
+21:07:30.528 | LSA_ACEITO | 127.0.0.5 | SEQ=5 | via 127.0.0.5 | #127.0.0.5;5*127.0.0.3;13*127.0.0.4;4
+21:07:30.528 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=5 | para 127.0.0.1, 127.0.0.4
+21:07:30.528 | LSA_DESCARTADO | 127.0.0.5 | SEQ=5 | duplicado (maior SEQ aceito=5) via 127.0.0.4
+21:07:30.648 | LSA_ACEITO | 127.0.0.2 | SEQ=5 | via 127.0.0.4 | #127.0.0.2;5*127.0.0.1;10*127.0.0.4;2
+21:07:30.648 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=5 | para 127.0.0.1, 127.0.0.5
+21:07:30.648 | LSA_DESCARTADO | 127.0.0.2 | SEQ=5 | duplicado (maior SEQ aceito=5) via 127.0.0.1
+21:07:30.648 | LSA_DESCARTADO | 127.0.0.2 | SEQ=5 | duplicado (maior SEQ aceito=5) via 127.0.0.5
+21:07:30.753 | LSA_ACEITO | 127.0.0.4 | SEQ=6 | via 127.0.0.4 | #127.0.0.4;6*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4
+21:07:30.754 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=6 | para 127.0.0.1, 127.0.0.5
+21:07:30.754 | LSA_DESCARTADO | 127.0.0.4 | SEQ=6 | duplicado (maior SEQ aceito=6) via 127.0.0.5
+21:07:30.937 | LSA_GERADO | 127.0.0.3 | SEQ=6 | renovação periódica | #127.0.0.3;6*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+
+VIZINHOS (IP local 127.0.0.3)
+  Vizinho           Custo  Enlace      Estado   Último HELLO
+  ---------------- ------  ----------- -------- ------------
+  127.0.0.1             7  ativado     ATIVO          há 5 s
+  127.0.0.4             7  ativado     ATIVO          há 4 s
+  127.0.0.5            13  ativado     ATIVO          há 4 s
+
+> 
+LSDB (5 origens)
+  Origem              SEQ  Recebido em  Expira em  Enlaces (vizinho;custo)
+  ---------------- ------  ------------ ---------  ------------------------------
+  127.0.0.1             5  21:07:30          21 s  127.0.0.2;10 127.0.0.3;5
+  127.0.0.2             5  21:07:30          21 s  127.0.0.1;10 127.0.0.4;2
+  127.0.0.3             6  21:07:30         local  127.0.0.1;7 127.0.0.4;7 127.0.0.5;13
+  127.0.0.4             6  21:07:30          21 s  127.0.0.2;2 127.0.0.3;7 127.0.0.5;4
+  127.0.0.5             5  21:07:30          21 s  127.0.0.3;13 127.0.0.4;4
+
+> 
+TABELA DE ROTEAMENTO
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+
+> 21:07:40.375 | LSA_ACEITO | 127.0.0.1 | SEQ=6 | via 127.0.0.1 | #127.0.0.1;6*127.0.0.2;10*127.0.0.3;5
+21:07:40.376 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=6 | para 127.0.0.4, 127.0.0.5
+21:07:40.589 | LSA_ACEITO | 127.0.0.5 | SEQ=6 | via 127.0.0.5 | #127.0.0.5;6*127.0.0.3;13*127.0.0.4;4
+21:07:40.589 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=6 | para 127.0.0.1, 127.0.0.4
+21:07:40.590 | LSA_DESCARTADO | 127.0.0.5 | SEQ=6 | duplicado (maior SEQ aceito=6) via 127.0.0.4
+21:07:40.704 | LSA_ACEITO | 127.0.0.2 | SEQ=6 | via 127.0.0.1 | #127.0.0.2;6*127.0.0.1;10*127.0.0.4;2
+21:07:40.705 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=6 | para 127.0.0.4, 127.0.0.5
+21:07:40.705 | LSA_DESCARTADO | 127.0.0.2 | SEQ=6 | duplicado (maior SEQ aceito=6) via 127.0.0.4
+21:07:40.705 | LSA_DESCARTADO | 127.0.0.2 | SEQ=6 | duplicado (maior SEQ aceito=6) via 127.0.0.5
+21:07:40.816 | LSA_ACEITO | 127.0.0.4 | SEQ=7 | via 127.0.0.4 | #127.0.0.4;7*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4
+21:07:40.816 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=7 | para 127.0.0.1, 127.0.0.5
+21:07:40.816 | LSA_DESCARTADO | 127.0.0.4 | SEQ=7 | duplicado (maior SEQ aceito=7) via 127.0.0.5
+21:07:41.006 | LSA_GERADO | 127.0.0.3 | SEQ=7 | renovação periódica | #127.0.0.3;7*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:07:50.453 | LSA_ACEITO | 127.0.0.1 | SEQ=7 | via 127.0.0.1 | #127.0.0.1;7*127.0.0.2;10*127.0.0.3;5
+21:07:50.454 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=7 | para 127.0.0.4, 127.0.0.5
+21:07:50.658 | LSA_ACEITO | 127.0.0.5 | SEQ=7 | via 127.0.0.5 | #127.0.0.5;7*127.0.0.3;13*127.0.0.4;4
+21:07:50.659 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=7 | para 127.0.0.1, 127.0.0.4
+21:07:50.659 | LSA_DESCARTADO | 127.0.0.5 | SEQ=7 | duplicado (maior SEQ aceito=7) via 127.0.0.4
+21:07:50.763 | LSA_ACEITO | 127.0.0.2 | SEQ=7 | via 127.0.0.4 | #127.0.0.2;7*127.0.0.1;10*127.0.0.4;2
+21:07:50.764 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=7 | para 127.0.0.1, 127.0.0.5
+21:07:50.764 | LSA_DESCARTADO | 127.0.0.2 | SEQ=7 | duplicado (maior SEQ aceito=7) via 127.0.0.1
+21:07:50.764 | LSA_DESCARTADO | 127.0.0.2 | SEQ=7 | duplicado (maior SEQ aceito=7) via 127.0.0.5
+21:07:50.891 | LSA_ACEITO | 127.0.0.4 | SEQ=8 | via 127.0.0.4 | #127.0.0.4;8*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4
+21:07:50.891 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=8 | para 127.0.0.1, 127.0.0.5
+21:07:50.892 | LSA_DESCARTADO | 127.0.0.4 | SEQ=8 | duplicado (maior SEQ aceito=8) via 127.0.0.5
+21:07:51.080 | LSA_GERADO | 127.0.0.3 | SEQ=8 | renovação periódica | #127.0.0.3;8*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:07:53.455 | LSA_ACEITO | 127.0.0.5 | SEQ=8 | via 127.0.0.5 | #127.0.0.5;8*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:07:53.457 | LSDB_ATUALIZADA | 127.0.0.5 | enlaces alterados
+21:07:53.461 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=8 | para 127.0.0.1, 127.0.0.4
+21:07:53.461 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:07:53.462 | LSA_ACEITO | 127.0.0.6 | SEQ=2 | via 127.0.0.5 | #127.0.0.6;2*127.0.0.5;3
+21:07:53.462 | LSDB_ATUALIZADA | 127.0.0.6 | nova origem
+21:07:53.462 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=2 | para 127.0.0.1, 127.0.0.4
+21:07:53.462 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:07:53.462 | ROTA_NOVA | 127.0.0.6 | custo 14 via 127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 14   127.0.0.4         [NOVA]
+
+21:07:53.462 | LSA_DESCARTADO | 127.0.0.5 | SEQ=8 | duplicado (maior SEQ aceito=8) via 127.0.0.4
+21:07:53.463 | LSA_ACEITO | 127.0.0.6 | SEQ=3 | via 127.0.0.5 | #127.0.0.6;3*127.0.0.4;6*127.0.0.5;3
+21:07:53.463 | LSDB_ATUALIZADA | 127.0.0.6 | enlaces alterados
+21:07:53.463 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=3 | para 127.0.0.1, 127.0.0.4
+21:07:53.463 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:07:53.463 | LSA_ACEITO | 127.0.0.4 | SEQ=9 | via 127.0.0.4 | #127.0.0.4;9*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:07:53.463 | LSDB_ATUALIZADA | 127.0.0.4 | enlaces alterados
+21:07:53.463 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=9 | para 127.0.0.1, 127.0.0.5
+21:07:53.463 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:07:53.463 | ROTA_ALTERADA | 127.0.0.6 | custo 14->13 | via 127.0.0.4->127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 13   127.0.0.4         [ALTERADA: antes custo 14 via 127.0.0.4]
+
+21:07:53.463 | LSA_DESCARTADO | 127.0.0.6 | SEQ=2 | antigo (maior SEQ aceito=3) via 127.0.0.4
+21:07:53.463 | LSA_DESCARTADO | 127.0.0.4 | SEQ=9 | duplicado (maior SEQ aceito=9) via 127.0.0.5
+21:07:53.464 | LSA_DESCARTADO | 127.0.0.6 | SEQ=3 | duplicado (maior SEQ aceito=3) via 127.0.0.4
+21:07:53.465 | LSA_DESCARTADO | 127.0.0.4 | SEQ=9 | duplicado (maior SEQ aceito=9) via 127.0.0.1
+21:08:00.519 | LSA_ACEITO | 127.0.0.1 | SEQ=8 | via 127.0.0.1 | #127.0.0.1;8*127.0.0.2;10*127.0.0.3;5
+21:08:00.519 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=8 | para 127.0.0.4, 127.0.0.5
+21:08:00.832 | LSA_ACEITO | 127.0.0.2 | SEQ=8 | via 127.0.0.4 | #127.0.0.2;8*127.0.0.1;10*127.0.0.4;2
+21:08:00.832 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=8 | para 127.0.0.1, 127.0.0.5
+21:08:00.833 | LSA_DESCARTADO | 127.0.0.2 | SEQ=8 | duplicado (maior SEQ aceito=8) via 127.0.0.1
+21:08:00.833 | LSA_DESCARTADO | 127.0.0.2 | SEQ=8 | duplicado (maior SEQ aceito=8) via 127.0.0.5
+21:08:01.163 | LSA_GERADO | 127.0.0.3 | SEQ=9 | renovação periódica | #127.0.0.3;9*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+
+TABELA DE ROTEAMENTO
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 13   127.0.0.4       
+
+> 21:08:03.471 | LSA_ACEITO | 127.0.0.4 | SEQ=10 | via 127.0.0.4 | #127.0.0.4;10*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:08:03.472 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=10 | para 127.0.0.1, 127.0.0.5
+21:08:03.472 | LSA_DESCARTADO | 127.0.0.4 | SEQ=10 | duplicado (maior SEQ aceito=10) via 127.0.0.5
+21:08:03.548 | LSA_ACEITO | 127.0.0.6 | SEQ=4 | via 127.0.0.5 | #127.0.0.6;4*127.0.0.4;6*127.0.0.5;3
+21:08:03.548 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=4 | para 127.0.0.1, 127.0.0.4
+21:08:03.548 | LSA_DESCARTADO | 127.0.0.6 | SEQ=4 | duplicado (maior SEQ aceito=4) via 127.0.0.4
+21:08:03.745 | LSA_ACEITO | 127.0.0.5 | SEQ=9 | via 127.0.0.5 | #127.0.0.5;9*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:08:03.746 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=9 | para 127.0.0.1, 127.0.0.4
+21:08:03.746 | LSA_DESCARTADO | 127.0.0.5 | SEQ=9 | duplicado (maior SEQ aceito=9) via 127.0.0.4
+21:08:07.928 | LSA_ACEITO | 127.0.0.2 | SEQ=9 | via 127.0.0.1 | #127.0.0.2;9*127.0.0.1;10
+21:08:07.928 | LSDB_ATUALIZADA | 127.0.0.2 | enlaces alterados
+21:08:07.928 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=9 | para 127.0.0.4, 127.0.0.5
+21:08:07.928 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:08:07.928 | ROTA_ALTERADA | 127.0.0.2 | custo 9->17 | via 127.0.0.4->127.0.0.1
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1         [ALTERADA: antes custo 9 via 127.0.0.4]
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 13   127.0.0.4       
+
+21:08:10.591 | LSA_ACEITO | 127.0.0.1 | SEQ=9 | via 127.0.0.1 | #127.0.0.1;9*127.0.0.2;10*127.0.0.3;5
+21:08:10.591 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=9 | para 127.0.0.4, 127.0.0.5
+21:08:11.237 | LSA_GERADO | 127.0.0.3 | SEQ=10 | renovação periódica | #127.0.0.3;10*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:08:13.544 | LSA_ACEITO | 127.0.0.4 | SEQ=11 | via 127.0.0.4 | #127.0.0.4;11*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:08:13.545 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=11 | para 127.0.0.1, 127.0.0.5
+21:08:13.545 | LSA_DESCARTADO | 127.0.0.4 | SEQ=11 | duplicado (maior SEQ aceito=11) via 127.0.0.5
+21:08:13.629 | LSA_ACEITO | 127.0.0.6 | SEQ=5 | via 127.0.0.5 | #127.0.0.6;5*127.0.0.4;6*127.0.0.5;3
+21:08:13.629 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=5 | para 127.0.0.1, 127.0.0.4
+21:08:13.629 | LSA_DESCARTADO | 127.0.0.6 | SEQ=5 | duplicado (maior SEQ aceito=5) via 127.0.0.4
+21:08:13.819 | LSA_ACEITO | 127.0.0.5 | SEQ=10 | via 127.0.0.5 | #127.0.0.5;10*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:08:13.819 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=10 | para 127.0.0.1, 127.0.0.4
+21:08:13.819 | LSA_DESCARTADO | 127.0.0.5 | SEQ=10 | duplicado (maior SEQ aceito=10) via 127.0.0.4
+21:08:17.967 | LSA_ACEITO | 127.0.0.2 | SEQ=10 | via 127.0.0.1 | #127.0.0.2;10*127.0.0.1;10
+21:08:17.967 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=10 | para 127.0.0.4, 127.0.0.5
+21:08:20.095 | LSA_ACEITO | 127.0.0.4 | SEQ=12 | via 127.0.0.4 | #127.0.0.4;12*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:08:20.095 | LSDB_ATUALIZADA | 127.0.0.4 | enlaces alterados
+21:08:20.095 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=12 | para 127.0.0.1, 127.0.0.5
+21:08:20.095 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:08:20.096 | LSA_DESCARTADO | 127.0.0.4 | SEQ=12 | duplicado (maior SEQ aceito=12) via 127.0.0.5
+21:08:20.672 | LSA_ACEITO | 127.0.0.1 | SEQ=10 | via 127.0.0.1 | #127.0.0.1;10*127.0.0.2;10*127.0.0.3;5
+21:08:20.673 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=10 | para 127.0.0.4, 127.0.0.5
+21:08:21.296 | LSA_GERADO | 127.0.0.3 | SEQ=11 | renovação periódica | #127.0.0.3;11*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:08:23.709 | LSA_ACEITO | 127.0.0.6 | SEQ=6 | via 127.0.0.5 | #127.0.0.6;6*127.0.0.4;6*127.0.0.5;3
+21:08:23.709 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=6 | para 127.0.0.1, 127.0.0.4
+21:08:23.710 | LSA_DESCARTADO | 127.0.0.6 | SEQ=6 | duplicado (maior SEQ aceito=6) via 127.0.0.4
+21:08:23.888 | LSA_ACEITO | 127.0.0.5 | SEQ=11 | via 127.0.0.5 | #127.0.0.5;11*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:08:23.888 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=11 | para 127.0.0.1, 127.0.0.4
+21:08:23.889 | LSA_DESCARTADO | 127.0.0.5 | SEQ=11 | duplicado (maior SEQ aceito=11) via 127.0.0.4
+21:08:28.040 | LSA_ACEITO | 127.0.0.2 | SEQ=11 | via 127.0.0.1 | #127.0.0.2;11*127.0.0.1;10
+21:08:28.041 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=11 | para 127.0.0.4, 127.0.0.5
+21:08:30.171 | LSA_ACEITO | 127.0.0.4 | SEQ=13 | via 127.0.0.4 | #127.0.0.4;13*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:08:30.171 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=13 | para 127.0.0.1, 127.0.0.5
+21:08:30.171 | LSA_DESCARTADO | 127.0.0.4 | SEQ=13 | duplicado (maior SEQ aceito=13) via 127.0.0.5
+21:08:30.577 | LSA_ACEITO | 127.0.0.4 | SEQ=14 | via 127.0.0.4 | #127.0.0.4;14*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:08:30.577 | LSDB_ATUALIZADA | 127.0.0.4 | enlaces alterados
+21:08:30.577 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=14 | para 127.0.0.1, 127.0.0.5
+21:08:30.578 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:08:30.578 | LSA_ACEITO | 127.0.0.2 | SEQ=12 | via 127.0.0.1 | #127.0.0.2;12*127.0.0.1;10*127.0.0.4;2
+21:08:30.578 | LSDB_ATUALIZADA | 127.0.0.2 | enlaces alterados
+21:08:30.578 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=12 | para 127.0.0.4, 127.0.0.5
+21:08:30.578 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:08:30.579 | ROTA_ALTERADA | 127.0.0.2 | custo 17->9 | via 127.0.0.1->127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4         [ALTERADA: antes custo 17 via 127.0.0.1]
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 13   127.0.0.4       
+
+21:08:30.579 | LSA_DESCARTADO | 127.0.0.2 | SEQ=12 | duplicado (maior SEQ aceito=12) via 127.0.0.4
+21:08:30.579 | LSA_DESCARTADO | 127.0.0.4 | SEQ=14 | duplicado (maior SEQ aceito=14) via 127.0.0.1
+21:08:30.579 | LSA_DESCARTADO | 127.0.0.4 | SEQ=14 | duplicado (maior SEQ aceito=14) via 127.0.0.5
+21:08:30.579 | LSA_DESCARTADO | 127.0.0.2 | SEQ=12 | duplicado (maior SEQ aceito=12) via 127.0.0.5
+21:08:30.737 | LSA_ACEITO | 127.0.0.1 | SEQ=11 | via 127.0.0.1 | #127.0.0.1;11*127.0.0.2;10*127.0.0.3;5
+21:08:30.737 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=11 | para 127.0.0.4, 127.0.0.5
+21:08:31.367 | LSA_GERADO | 127.0.0.3 | SEQ=12 | renovação periódica | #127.0.0.3;12*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:08:33.781 | LSA_ACEITO | 127.0.0.6 | SEQ=7 | via 127.0.0.5 | #127.0.0.6;7*127.0.0.4;6*127.0.0.5;3
+21:08:33.781 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=7 | para 127.0.0.1, 127.0.0.4
+21:08:33.782 | LSA_DESCARTADO | 127.0.0.6 | SEQ=7 | duplicado (maior SEQ aceito=7) via 127.0.0.4
+21:08:33.954 | LSA_ACEITO | 127.0.0.5 | SEQ=12 | via 127.0.0.5 | #127.0.0.5;12*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:08:33.954 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=12 | para 127.0.0.1, 127.0.0.4
+21:08:33.954 | LSA_DESCARTADO | 127.0.0.5 | SEQ=12 | duplicado (maior SEQ aceito=12) via 127.0.0.4
+21:08:40.638 | LSA_ACEITO | 127.0.0.2 | SEQ=13 | via 127.0.0.1 | #127.0.0.2;13*127.0.0.1;10*127.0.0.4;2
+21:08:40.639 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=13 | para 127.0.0.4, 127.0.0.5
+21:08:40.639 | LSA_DESCARTADO | 127.0.0.2 | SEQ=13 | duplicado (maior SEQ aceito=13) via 127.0.0.4
+21:08:40.639 | LSA_DESCARTADO | 127.0.0.2 | SEQ=13 | duplicado (maior SEQ aceito=13) via 127.0.0.5
+21:08:40.738 | LSA_ACEITO | 127.0.0.4 | SEQ=15 | via 127.0.0.4 | #127.0.0.4;15*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:08:40.739 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=15 | para 127.0.0.1, 127.0.0.5
+21:08:40.739 | LSA_DESCARTADO | 127.0.0.4 | SEQ=15 | duplicado (maior SEQ aceito=15) via 127.0.0.5
+21:08:40.804 | LSA_ACEITO | 127.0.0.1 | SEQ=12 | via 127.0.0.1 | #127.0.0.1;12*127.0.0.2;10*127.0.0.3;5
+21:08:40.804 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=12 | para 127.0.0.4, 127.0.0.5
+21:08:41.441 | LSA_GERADO | 127.0.0.3 | SEQ=13 | renovação periódica | #127.0.0.3;13*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:08:43.844 | LSA_ACEITO | 127.0.0.6 | SEQ=8 | via 127.0.0.5 | #127.0.0.6;8*127.0.0.4;6*127.0.0.5;3
+21:08:43.845 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=8 | para 127.0.0.1, 127.0.0.4
+21:08:43.845 | LSA_DESCARTADO | 127.0.0.6 | SEQ=8 | duplicado (maior SEQ aceito=8) via 127.0.0.4
+21:08:44.017 | LSA_ACEITO | 127.0.0.5 | SEQ=13 | via 127.0.0.5 | #127.0.0.5;13*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:08:44.019 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=13 | para 127.0.0.1, 127.0.0.4
+21:08:44.019 | LSA_DESCARTADO | 127.0.0.5 | SEQ=13 | duplicado (maior SEQ aceito=13) via 127.0.0.4
+21:08:50.706 | LSA_ACEITO | 127.0.0.2 | SEQ=14 | via 127.0.0.1 | #127.0.0.2;14*127.0.0.1;10*127.0.0.4;2
+21:08:50.706 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=14 | para 127.0.0.4, 127.0.0.5
+21:08:50.877 | LSA_ACEITO | 127.0.0.1 | SEQ=13 | via 127.0.0.1 | #127.0.0.1;13*127.0.0.2;10*127.0.0.3;5
+21:08:50.878 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=13 | para 127.0.0.4, 127.0.0.5
+21:08:51.518 | LSA_GERADO | 127.0.0.3 | SEQ=14 | renovação periódica | #127.0.0.3;14*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:08:53.910 | LSA_ACEITO | 127.0.0.6 | SEQ=9 | via 127.0.0.5 | #127.0.0.6;9*127.0.0.4;6*127.0.0.5;3
+21:08:53.910 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=9 | para 127.0.0.1, 127.0.0.4
+21:08:54.087 | LSA_ACEITO | 127.0.0.5 | SEQ=14 | via 127.0.0.5 | #127.0.0.5;14*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:08:54.088 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=14 | para 127.0.0.1, 127.0.0.4
+21:08:55.930 | LSA_ACEITO | 127.0.0.6 | SEQ=10 | via 127.0.0.5 | #127.0.0.6;10*127.0.0.5;3
+21:08:55.930 | LSDB_ATUALIZADA | 127.0.0.6 | enlaces alterados
+21:08:55.930 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=10 | para 127.0.0.1, 127.0.0.4
+21:08:55.931 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:08:55.931 | ROTA_ALTERADA | 127.0.0.6 | custo 13->14 | via 127.0.0.4->127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 14   127.0.0.4         [ALTERADA: antes custo 13 via 127.0.0.4]
+
+21:08:56.051 | VIZINHO_INATIVO | 127.0.0.4 | mais de 15 s sem HELLO
+21:08:56.054 | LSA_GERADO | 127.0.0.3 | SEQ=15 | vizinhança com 127.0.0.4 perdida | #127.0.0.3;15*127.0.0.1;7*127.0.0.5;13
+21:08:56.054 | LSDB_ATUALIZADA | 127.0.0.3 | LSA local: enlaces alterados
+21:08:56.055 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:08:56.055 | ROTA_ALTERADA | 127.0.0.2 | custo 9->17 | via 127.0.0.4->127.0.0.1
+21:08:56.055 | ROTA_ALTERADA | 127.0.0.4 | custo 7->17 | via 127.0.0.4->127.0.0.5
+21:08:56.055 | ROTA_ALTERADA | 127.0.0.5 | custo 11->13 | via 127.0.0.4->127.0.0.5
+21:08:56.055 | ROTA_ALTERADA | 127.0.0.6 | custo 14->16 | via 127.0.0.4->127.0.0.5
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1         [ALTERADA: antes custo 9 via 127.0.0.4]
+  127.0.0.4                 17   127.0.0.5         [ALTERADA: antes custo 7 via 127.0.0.4]
+  127.0.0.5                 13   127.0.0.5         [ALTERADA: antes custo 11 via 127.0.0.4]
+  127.0.0.6                 16   127.0.0.5         [ALTERADA: antes custo 14 via 127.0.0.4]
+
+21:08:56.104 | LSA_ACEITO | 127.0.0.5 | SEQ=15 | via 127.0.0.5 | #127.0.0.5;15*127.0.0.3;13*127.0.0.6;3
+21:08:56.104 | LSDB_ATUALIZADA | 127.0.0.5 | enlaces alterados
+21:08:56.104 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=15 | para 127.0.0.1
+21:08:56.105 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:08:56.105 | ROTA_ALTERADA | 127.0.0.4 | custo 17->19 | via 127.0.0.5->127.0.0.1
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1       
+  127.0.0.4                 19   127.0.0.1         [ALTERADA: antes custo 17 via 127.0.0.5]
+  127.0.0.5                 13   127.0.0.5       
+  127.0.0.6                 16   127.0.0.5       
+
+21:08:56.244 | LSA_ACEITO | 127.0.0.2 | SEQ=15 | via 127.0.0.1 | #127.0.0.2;15*127.0.0.1;10
+21:08:56.244 | LSDB_ATUALIZADA | 127.0.0.2 | enlaces alterados
+21:08:56.245 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=15 | para 127.0.0.5
+21:08:56.245 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 4 rotas
+21:08:56.245 | ROTA_REMOVIDA | 127.0.0.4 | era custo 19 via 127.0.0.1
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1       
+  127.0.0.5                 13   127.0.0.5       
+  127.0.0.6                 16   127.0.0.5       
+  127.0.0.4                  -   -                 [REMOVIDA: era custo 19 via 127.0.0.1]
+
+21:09:00.955 | LSA_ACEITO | 127.0.0.1 | SEQ=14 | via 127.0.0.1 | #127.0.0.1;14*127.0.0.2;10*127.0.0.3;5
+21:09:00.955 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=14 | para 127.0.0.5
+
+TABELA DE ROTEAMENTO
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1       
+  127.0.0.5                 13   127.0.0.5       
+  127.0.0.6                 16   127.0.0.5       
+
+> 21:09:05.996 | LSA_ACEITO | 127.0.0.6 | SEQ=11 | via 127.0.0.5 | #127.0.0.6;11*127.0.0.5;3
+21:09:05.997 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=11 | para 127.0.0.1
+21:09:06.130 | LSA_GERADO | 127.0.0.3 | SEQ=16 | renovação periódica | #127.0.0.3;16*127.0.0.1;7*127.0.0.5;13
+21:09:06.174 | LSA_ACEITO | 127.0.0.5 | SEQ=16 | via 127.0.0.5 | #127.0.0.5;16*127.0.0.3;13*127.0.0.6;3
+21:09:06.174 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=16 | para 127.0.0.1
+21:09:06.317 | LSA_ACEITO | 127.0.0.2 | SEQ=16 | via 127.0.0.1 | #127.0.0.2;16*127.0.0.1;10
+21:09:06.317 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=16 | para 127.0.0.5
+21:09:11.025 | LSA_ACEITO | 127.0.0.1 | SEQ=15 | via 127.0.0.1 | #127.0.0.1;15*127.0.0.2;10*127.0.0.3;5
+21:09:11.027 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=15 | para 127.0.0.5
+21:09:11.162 | LSA_EXPIRADO | 127.0.0.4 | SEQ=15 | sem renovação há mais de 30 s
+21:09:11.163 | LSDB_ATUALIZADA | 127.0.0.4 | removido (expirado)
+21:09:11.163 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:09:16.076 | LSA_ACEITO | 127.0.0.6 | SEQ=12 | via 127.0.0.5 | #127.0.0.6;12*127.0.0.5;3
+21:09:16.076 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=12 | para 127.0.0.1
+21:09:16.204 | LSA_GERADO | 127.0.0.3 | SEQ=17 | renovação periódica | #127.0.0.3;17*127.0.0.1;7*127.0.0.5;13
+21:09:16.247 | LSA_ACEITO | 127.0.0.5 | SEQ=17 | via 127.0.0.5 | #127.0.0.5;17*127.0.0.3;13*127.0.0.6;3
+21:09:16.248 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=17 | para 127.0.0.1
+21:09:16.399 | LSA_ACEITO | 127.0.0.2 | SEQ=17 | via 127.0.0.1 | #127.0.0.2;17*127.0.0.1;10
+21:09:16.399 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=17 | para 127.0.0.5
+21:09:21.090 | LSA_ACEITO | 127.0.0.1 | SEQ=16 | via 127.0.0.1 | #127.0.0.1;16*127.0.0.2;10*127.0.0.3;5
+21:09:21.091 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=16 | para 127.0.0.5
+21:09:24.435 | VIZINHO_ATIVO | 127.0.0.4 | custo 7
+21:09:24.435 | LSA_GERADO | 127.0.0.3 | SEQ=18 | vizinhança com 127.0.0.4 estabelecida | #127.0.0.3;18*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:09:24.435 | LSDB_ATUALIZADA | 127.0.0.3 | LSA local: enlaces alterados
+21:09:24.435 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:09:24.435 | LSDB_SINCRONIZADA | 127.0.0.4 | 5 LSAs enviados ao novo vizinho
+21:09:24.436 | LSA_ACEITO | 127.0.0.5 | SEQ=18 | via 127.0.0.5 | #127.0.0.5;18*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:09:24.436 | LSDB_ATUALIZADA | 127.0.0.5 | enlaces alterados
+21:09:24.436 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=18 | para 127.0.0.1, 127.0.0.4
+21:09:24.436 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:09:24.436 | LSA_ACEITO | 127.0.0.6 | SEQ=13 | via 127.0.0.5 | #127.0.0.6;13*127.0.0.4;6*127.0.0.5;3
+21:09:24.436 | LSDB_ATUALIZADA | 127.0.0.6 | enlaces alterados
+21:09:24.436 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=13 | para 127.0.0.1, 127.0.0.4
+21:09:24.436 | DIJKSTRA_EXECUTADO | 5 nós na LSDB | 4 rotas
+21:09:24.436 | LSA_ACEITO | 127.0.0.4 | SEQ=17 | via 127.0.0.4 | #127.0.0.4;17*127.0.0.3;7
+21:09:24.436 | LSDB_ATUALIZADA | 127.0.0.4 | nova origem
+21:09:24.436 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=17 | para 127.0.0.1, 127.0.0.5
+21:09:24.436 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:09:24.436 | ROTA_NOVA | 127.0.0.4 | custo 7 via 127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1       
+  127.0.0.4                  7   127.0.0.4         [NOVA]
+  127.0.0.5                 13   127.0.0.5       
+  127.0.0.6                 16   127.0.0.5       
+
+21:09:24.436 | LSA_ACEITO | 127.0.0.2 | SEQ=18 | via 127.0.0.1 | #127.0.0.2;18*127.0.0.1;10*127.0.0.4;2
+21:09:24.437 | LSDB_ATUALIZADA | 127.0.0.2 | enlaces alterados
+21:09:24.437 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=18 | para 127.0.0.4, 127.0.0.5
+21:09:24.437 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:09:24.437 | LSA_ACEITO | 127.0.0.4 | SEQ=18 | via 127.0.0.4 | #127.0.0.4;18*127.0.0.3;7*127.0.0.5;4
+21:09:24.437 | LSDB_ATUALIZADA | 127.0.0.4 | enlaces alterados
+21:09:24.437 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=18 | para 127.0.0.1, 127.0.0.5
+21:09:24.437 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:09:24.437 | ROTA_ALTERADA | 127.0.0.5 | custo 13->11 | via 127.0.0.5->127.0.0.4
+21:09:24.437 | ROTA_ALTERADA | 127.0.0.6 | custo 16->14 | via 127.0.0.5->127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                 17   127.0.0.1       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4         [ALTERADA: antes custo 13 via 127.0.0.5]
+  127.0.0.6                 14   127.0.0.4         [ALTERADA: antes custo 16 via 127.0.0.5]
+
+21:09:24.437 | LSA_DESCARTADO | 127.0.0.4 | SEQ=18 | duplicado (maior SEQ aceito=18) via 127.0.0.5
+21:09:24.437 | LSA_ACEITO | 127.0.0.4 | SEQ=19 | via 127.0.0.4 | #127.0.0.4;19*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4
+21:09:24.437 | LSDB_ATUALIZADA | 127.0.0.4 | enlaces alterados
+21:09:24.437 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=19 | para 127.0.0.1, 127.0.0.5
+21:09:24.437 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:09:24.437 | ROTA_ALTERADA | 127.0.0.2 | custo 17->9 | via 127.0.0.1->127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4         [ALTERADA: antes custo 17 via 127.0.0.1]
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 14   127.0.0.4       
+
+21:09:24.437 | LSA_DESCARTADO | 127.0.0.4 | SEQ=19 | duplicado (maior SEQ aceito=19) via 127.0.0.5
+21:09:24.437 | LSA_ACEITO | 127.0.0.4 | SEQ=20 | via 127.0.0.4 | #127.0.0.4;20*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:09:24.437 | LSDB_ATUALIZADA | 127.0.0.4 | enlaces alterados
+21:09:24.437 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=20 | para 127.0.0.1, 127.0.0.5
+21:09:24.437 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:09:24.437 | ROTA_ALTERADA | 127.0.0.6 | custo 14->13 | via 127.0.0.4->127.0.0.4
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  9   127.0.0.4       
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 13   127.0.0.4         [ALTERADA: antes custo 14 via 127.0.0.4]
+
+21:09:24.437 | LSA_DESCARTADO | 127.0.0.2 | SEQ=18 | duplicado (maior SEQ aceito=18) via 127.0.0.4
+21:09:24.437 | LSA_DESCARTADO | 127.0.0.5 | SEQ=18 | duplicado (maior SEQ aceito=18) via 127.0.0.4
+21:09:24.437 | LSA_DESCARTADO | 127.0.0.4 | SEQ=20 | duplicado (maior SEQ aceito=20) via 127.0.0.5
+21:09:24.438 | LSA_DESCARTADO | 127.0.0.4 | SEQ=19 | antigo (maior SEQ aceito=20) via 127.0.0.1
+21:09:24.438 | LSA_DESCARTADO | 127.0.0.6 | SEQ=13 | duplicado (maior SEQ aceito=13) via 127.0.0.4
+21:09:24.438 | LSA_DESCARTADO | 127.0.0.4 | SEQ=20 | duplicado (maior SEQ aceito=20) via 127.0.0.1
+21:09:31.164 | LSA_ACEITO | 127.0.0.1 | SEQ=17 | via 127.0.0.1 | #127.0.0.1;17*127.0.0.2;10*127.0.0.3;5
+21:09:31.165 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=17 | para 127.0.0.4, 127.0.0.5
+21:09:31.165 | LSA_DESCARTADO | 127.0.0.1 | SEQ=17 | duplicado (maior SEQ aceito=17) via 127.0.0.4
+21:09:34.505 | LSA_ACEITO | 127.0.0.4 | SEQ=21 | via 127.0.0.4 | #127.0.0.4;21*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:09:34.506 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=21 | para 127.0.0.1, 127.0.0.5
+21:09:34.506 | LSA_DESCARTADO | 127.0.0.4 | SEQ=21 | duplicado (maior SEQ aceito=21) via 127.0.0.5
+21:09:34.506 | LSA_DESCARTADO | 127.0.0.4 | SEQ=21 | duplicado (maior SEQ aceito=21) via 127.0.0.1
+21:09:34.528 | LSA_ACEITO | 127.0.0.2 | SEQ=19 | via 127.0.0.4 | #127.0.0.2;19*127.0.0.1;10*127.0.0.4;2
+21:09:34.528 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=19 | para 127.0.0.1, 127.0.0.5
+21:09:34.528 | LSA_DESCARTADO | 127.0.0.2 | SEQ=19 | duplicado (maior SEQ aceito=19) via 127.0.0.1
+21:09:34.529 | LSA_DESCARTADO | 127.0.0.2 | SEQ=19 | duplicado (maior SEQ aceito=19) via 127.0.0.5
+21:09:34.689 | LSA_ACEITO | 127.0.0.6 | SEQ=14 | via 127.0.0.5 | #127.0.0.6;14*127.0.0.4;6*127.0.0.5;3
+21:09:34.689 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=14 | para 127.0.0.1, 127.0.0.4
+21:09:34.689 | LSA_DESCARTADO | 127.0.0.6 | SEQ=14 | duplicado (maior SEQ aceito=14) via 127.0.0.4
+21:09:34.846 | LSA_GERADO | 127.0.0.3 | SEQ=19 | renovação periódica | #127.0.0.3;19*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:09:34.868 | LSA_ACEITO | 127.0.0.5 | SEQ=19 | via 127.0.0.5 | #127.0.0.5;19*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:09:34.868 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=19 | para 127.0.0.1, 127.0.0.4
+21:09:34.869 | LSA_DESCARTADO | 127.0.0.5 | SEQ=19 | duplicado (maior SEQ aceito=19) via 127.0.0.4
+21:09:41.225 | LSA_ACEITO | 127.0.0.1 | SEQ=18 | via 127.0.0.1 | #127.0.0.1;18*127.0.0.2;10*127.0.0.3;5
+21:09:41.225 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=18 | para 127.0.0.4, 127.0.0.5
+21:09:41.226 | LSA_DESCARTADO | 127.0.0.1 | SEQ=18 | duplicado (maior SEQ aceito=18) via 127.0.0.4
+21:09:44.565 | LSA_ACEITO | 127.0.0.4 | SEQ=22 | via 127.0.0.4 | #127.0.0.4;22*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:09:44.565 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=22 | para 127.0.0.1, 127.0.0.5
+21:09:44.566 | LSA_DESCARTADO | 127.0.0.4 | SEQ=22 | duplicado (maior SEQ aceito=22) via 127.0.0.5
+21:09:44.586 | LSA_ACEITO | 127.0.0.2 | SEQ=20 | via 127.0.0.1 | #127.0.0.2;20*127.0.0.1;10*127.0.0.4;2
+21:09:44.587 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=20 | para 127.0.0.4, 127.0.0.5
+21:09:44.587 | LSA_DESCARTADO | 127.0.0.2 | SEQ=20 | duplicado (maior SEQ aceito=20) via 127.0.0.4
+21:09:44.588 | LSA_DESCARTADO | 127.0.0.2 | SEQ=20 | duplicado (maior SEQ aceito=20) via 127.0.0.5
+21:09:44.751 | LSA_ACEITO | 127.0.0.6 | SEQ=15 | via 127.0.0.4 | #127.0.0.6;15*127.0.0.4;6*127.0.0.5;3
+21:09:44.751 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=15 | para 127.0.0.1, 127.0.0.5
+21:09:44.751 | LSA_DESCARTADO | 127.0.0.6 | SEQ=15 | duplicado (maior SEQ aceito=15) via 127.0.0.5
+21:09:44.919 | LSA_GERADO | 127.0.0.3 | SEQ=20 | renovação periódica | #127.0.0.3;20*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:09:44.939 | LSA_ACEITO | 127.0.0.5 | SEQ=20 | via 127.0.0.5 | #127.0.0.5;20*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:09:44.940 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=20 | para 127.0.0.1, 127.0.0.4
+21:09:44.940 | LSA_DESCARTADO | 127.0.0.5 | SEQ=20 | duplicado (maior SEQ aceito=20) via 127.0.0.4
+21:09:46.450 | LSA_ACEITO | 127.0.0.1 | SEQ=19 | via 127.0.0.1 | #127.0.0.1;19*127.0.0.2;1*127.0.0.3;5
+21:09:46.451 | LSDB_ATUALIZADA | 127.0.0.1 | enlaces alterados
+21:09:46.452 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=19 | para 127.0.0.4, 127.0.0.5
+21:09:46.453 | DIJKSTRA_EXECUTADO | 6 nós na LSDB | 5 rotas
+21:09:46.454 | ROTA_ALTERADA | 127.0.0.2 | custo 9->8 | via 127.0.0.4->127.0.0.1
+
+TABELA DE ROTEAMENTO (atualizada)
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                  7   127.0.0.1       
+  127.0.0.2                  8   127.0.0.1         [ALTERADA: antes custo 9 via 127.0.0.4]
+  127.0.0.4                  7   127.0.0.4       
+  127.0.0.5                 11   127.0.0.4       
+  127.0.0.6                 13   127.0.0.4       
+
+21:09:46.455 | LSA_DESCARTADO | 127.0.0.1 | SEQ=19 | duplicado (maior SEQ aceito=19) via 127.0.0.4
+21:09:54.625 | LSA_ACEITO | 127.0.0.4 | SEQ=23 | via 127.0.0.4 | #127.0.0.4;23*127.0.0.2;2*127.0.0.3;7*127.0.0.5;4*127.0.0.6;6
+21:09:54.625 | LSA_ENCAMINHADO | 127.0.0.4 | SEQ=23 | para 127.0.0.1, 127.0.0.5
+21:09:54.626 | LSA_DESCARTADO | 127.0.0.4 | SEQ=23 | duplicado (maior SEQ aceito=23) via 127.0.0.5
+21:09:54.627 | LSA_DESCARTADO | 127.0.0.4 | SEQ=23 | duplicado (maior SEQ aceito=23) via 127.0.0.1
+21:09:54.645 | LSA_ACEITO | 127.0.0.2 | SEQ=21 | via 127.0.0.1 | #127.0.0.2;21*127.0.0.1;10*127.0.0.4;2
+21:09:54.646 | LSA_ENCAMINHADO | 127.0.0.2 | SEQ=21 | para 127.0.0.4, 127.0.0.5
+21:09:54.646 | LSA_DESCARTADO | 127.0.0.2 | SEQ=21 | duplicado (maior SEQ aceito=21) via 127.0.0.4
+21:09:54.646 | LSA_DESCARTADO | 127.0.0.2 | SEQ=21 | duplicado (maior SEQ aceito=21) via 127.0.0.5
+21:09:54.821 | LSA_ACEITO | 127.0.0.6 | SEQ=16 | via 127.0.0.5 | #127.0.0.6;16*127.0.0.4;6*127.0.0.5;3
+21:09:54.822 | LSA_ENCAMINHADO | 127.0.0.6 | SEQ=16 | para 127.0.0.1, 127.0.0.4
+21:09:54.822 | LSA_DESCARTADO | 127.0.0.6 | SEQ=16 | duplicado (maior SEQ aceito=16) via 127.0.0.4
+21:09:55.001 | LSA_GERADO | 127.0.0.3 | SEQ=21 | renovação periódica | #127.0.0.3;21*127.0.0.1;7*127.0.0.4;7*127.0.0.5;13
+21:09:55.007 | LSA_ACEITO | 127.0.0.5 | SEQ=21 | via 127.0.0.5 | #127.0.0.5;21*127.0.0.3;13*127.0.0.4;4*127.0.0.6;3
+21:09:55.007 | LSA_ENCAMINHADO | 127.0.0.5 | SEQ=21 | para 127.0.0.1, 127.0.0.4
+21:09:55.007 | LSA_DESCARTADO | 127.0.0.5 | SEQ=21 | duplicado (maior SEQ aceito=21) via 127.0.0.4
+21:09:56.833 | LSA_ACEITO | 127.0.0.1 | SEQ=20 | via 127.0.0.1 | #127.0.0.1;20*127.0.0.2;1*127.0.0.3;5
+21:09:56.833 | LSA_ENCAMINHADO | 127.0.0.1 | SEQ=20 | para 127.0.0.4, 127.0.0.5
+21:10:00.376 | ROTEADOR_ENCERRADO | 127.0.0.3

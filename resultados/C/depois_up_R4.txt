@@ -1,0 +1,19 @@
+# C – depois_up – R4 (127.0.0.4) – 21:08:40.997
+$ vizinhos
+VIZINHOS (IP local 127.0.0.4)
+  Vizinho           Custo  Enlace      Estado   Último HELLO
+  ---------------- ------  ----------- -------- ------------
+  127.0.0.2             2  ativado     ATIVO          há 0 s
+  127.0.0.3             7  ativado     ATIVO          há 5 s
+  127.0.0.5             4  ativado     ATIVO          há 4 s
+  127.0.0.6             6  ativado     ATIVO          há 5 s
+
+$ rotas
+TABELA DE ROTEAMENTO
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                 12   127.0.0.2       
+  127.0.0.2                  2   127.0.0.2       
+  127.0.0.3                  7   127.0.0.3       
+  127.0.0.5                  4   127.0.0.5       
+  127.0.0.6                  6   127.0.0.6       

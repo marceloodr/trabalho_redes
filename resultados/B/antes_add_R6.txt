@@ -1,0 +1,13 @@
+# B – antes_add – R6 (127.0.0.6) – 21:07:52.635
+$ vizinhos
+VIZINHOS (IP local 127.0.0.6)
+  Vizinho           Custo  Enlace      Estado   Último HELLO
+  ---------------- ------  ----------- -------- ------------
+  127.0.0.4             6  ativado     inativo         nunca
+  127.0.0.5             3  ativado     inativo         nunca
+
+$ lsdb
+LSDB (1 origens)
+  Origem              SEQ  Recebido em  Expira em  Enlaces (vizinho;custo)
+  ---------------- ------  ------------ ---------  ------------------------------
+  127.0.0.6             1  21:07:44         local  (nenhum)

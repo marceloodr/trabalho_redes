@@ -1,0 +1,9 @@
+# C – t03s – R4 (127.0.0.4) – 21:08:11.742
+$ vizinhos
+VIZINHOS (IP local 127.0.0.4)
+  Vizinho           Custo  Enlace      Estado   Último HELLO
+  ---------------- ------  ----------- -------- ------------
+  127.0.0.2             2  ativado     ATIVO          há 6 s
+  127.0.0.3             7  ativado     ATIVO          há 1 s
+  127.0.0.5             4  ativado     ATIVO          há 1 s
+  127.0.0.6             6  ativado     ATIVO          há 1 s

@@ -1,0 +1,16 @@
+# A – t04s – R5 (127.0.0.5) – 21:07:18.704
+$ vizinhos
+VIZINHOS (IP local 127.0.0.5)
+  Vizinho           Custo  Enlace      Estado   Último HELLO
+  ---------------- ------  ----------- -------- ------------
+  127.0.0.3            13  ativado     ATIVO          há 3 s
+  127.0.0.4             4  ativado     ATIVO          há 3 s
+
+$ rotas
+TABELA DE ROTEAMENTO
+  Destino          Custo total   Próximo salto   
+  ---------------- -----------   ----------------
+  127.0.0.1                 16   127.0.0.4       
+  127.0.0.2                  6   127.0.0.4       
+  127.0.0.3                 11   127.0.0.4       
+  127.0.0.4                  4   127.0.0.4       

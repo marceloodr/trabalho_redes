@@ -1,0 +1,6 @@
+# Regras de coloração do Trabalho Final (Link State, UDP 6000).
+# HELLO = azul, LSA = verde, DATA = laranja, mensagem malformada = vermelho.
+@LS malformada@linkstate.tipo == "DESCONHECIDO" || _ws.expert.message contains "malformada"@[65535,65535,65535][52428,0,0]
+@LS HELLO@linkstate.tipo == "HELLO"@[0,0,0][45232,53970,65535]
+@LS LSA@linkstate.tipo == "LSA"@[0,0,0][43176,59110,41634]
+@LS DATA@linkstate.tipo == "DATA"@[0,0,0][65535,49087,26214]

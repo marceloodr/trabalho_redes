@@ -1,0 +1,11 @@
+# Perfil "TF-Redes": colunas com IPs e portas UDP visíveis.
+gui.column.format: 
+	"No.", "%m",
+	"Tempo", "%t",
+	"Origem IP", "%s",
+	"Porta orig.", "%uS",
+	"Destino IP", "%d",
+	"Porta dest.", "%uD",
+	"Protocolo", "%p",
+	"Bytes", "%L",
+	"Info", "%i"
