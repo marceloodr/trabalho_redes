@@ -252,7 +252,9 @@ def wireshark_table(capture, display_filter, limit=None, caption=None):
     more = f" — {len(rows)} de {total} pacotes" if limit and total > len(rows) else ""
     cap = (f'<div class="wscap">Wireshark: <code>{E(capture)}</code>, filtro '
            f'<code>{E(display_filter)}</code>{more}' + (f". {caption}" if caption else "") + "</div>")
-    return cap + f'<table class="ws">{head}{"".join(body)}</table>'
+    table = cap + f'<table class="ws">{head}{"".join(body)}</table>'
+    # legenda, cabeçalho e linhas na mesma página (tabelas curtas)
+    return f'<div class="avoid">{table}</div>' if len(rows) <= 25 else table
 
 
 def side_by_side(*cells):
@@ -435,6 +437,8 @@ tr.removida td { color: #b3261e; font-weight: bold; } table.sbs td { vertical-al
 .cell-title { font-size: 8pt; font-weight: bold; color: #2b5797; margin-top: 4pt; }
 .box-exp { border-left: 4px solid #2b5797; background: #f1f5fb; padding: 4pt 8pt; margin: 6pt 0; }
 .box-obs { border-left: 4px solid #137333; background: #f0f8f1; padding: 4pt 8pt; margin: 6pt 0; }
+.box-exp, .box-obs { page-break-inside: avoid; }
+.box-exp { page-break-after: avoid; }
 .box-exp b, .box-obs b { display: block; font-size: 8.6pt; text-transform: uppercase; letter-spacing: .03em; }
 svg.topo { width: 78%; display: block; margin: 4pt auto; }
 svg.topo .cost { font: bold 13px sans-serif; text-anchor: middle; fill: #a15c00; }
@@ -703,7 +707,8 @@ todos os roteadores ganham uma rota [NOVA] para R6, sem reiniciar ninguém.</div
 <div class="box-obs"><b>Observado</b>R4 e R5 descartaram os HELLOs de R6 ("não é vizinho configurado"). Às {t_add}
 foram executados <code>add 127.0.0.6 6</code> em R4 e <code>add 127.0.0.6 3</code> em R5; em milissegundos as
 vizinhanças R4–R6 e R5–R6 ficaram ativas, R6 recebeu os LSAs de todas as origens e calculou a tabela completa. R1
-ganhou a rota [NOVA] para R6 com custo 18 (R1→R2/R3→R4→R6 = 12+6; via R5 seria 16+3 = 19).</div>
+ganhou a rota [NOVA] para R6 com custo 19 (via R5: 16+3), porque o LSA de R4 com o enlace R4–R6 ainda não tinha
+chegado; 1 ms depois esse LSA chegou e a rota passou a 18 (R1→R2/R3→R4→R6 = 12+6).</div>
 {pre(logs("B", ["R4", "R5", "R6"], include="HELLO_DESCARTADO|VIZINHO_|LSDB_SINCRONIZADA|ROTEADOR_INICIADO", limit=14))}
 {wireshark_table("B_novo_roteador.pcapng", 'linkstate.tipo=="HELLO" && (ip.addr==127.0.0.6)', limit=12,
                  caption="antes do add, o HELLO de R4 para R6 não existia; depois dele, R4 envia HELLO a R6 e passa a listá-lo")}
@@ -711,8 +716,9 @@ ganhou a rota [NOVA] para R6 com custo 18 (R1→R2/R3→R4→R6 = 12+6; via R5 s
                  caption="sincronização: R4 e R5 enviam a R6 os LSAs de todas as origens assim que a vizinhança sobe")}
 <p>LSAs aceitos por R6 na sincronização e primeira tabela:</p>
 {pre(logs("B", ["R6"], include="LSA_ACEITO|DIJKSTRA", start=t_add, limit=12, strip_text=True))}
-{side_by_side(("R1 – tabela impressa após o add", highlight_table(terminal_table("R1", t_add))),
-              ("R6 – LSDB após a sincronização", term_html(snap("B", "depois_add_lsdb_R6", "lsdb"))))}""")
+{side_by_side(("R1 – 1ª tabela após o add (rota nova, custo 19)", highlight_table(terminal_table("R1", t_add))),
+              ("R1 – 1 ms depois (custo 18)", highlight_table(terminal_table("R1", t_add, nth=2))))}
+{side_by_side(("R6 – LSDB após a sincronização", term_html(snap("B", "depois_add_lsdb_R6", "lsdb"))), ("", ""))}""")
 
     # C
     t_down = event_time("C", "down 127.0.0.4")
@@ -818,7 +824,8 @@ continua 10, então as rotas que chegam a R1 não mudam.</div>
               ("R2 – tabela (inalterada)", term_html(snap("G", "depois_R2", "rotas"))))}
 {side_by_side(("R2 – LSDB antes (fim do cenário F)", term_html(snap("F", "depois_R2", "lsdb"))),
               ("R2 – LSDB depois da mudança", term_html(snap("G", "depois_lsdb_R2", "lsdb"))))}
-<p>Só a entrada de 127.0.0.1 mudou: SEQ 18 → 19 e o enlace 127.0.0.2;10 → 127.0.0.2;1.</p>""")
+<p>Nos enlaces, só a entrada de 127.0.0.1 mudou: 127.0.0.2;10 → 127.0.0.2;1 (SEQ 18 → 19). As demais origens
+apenas avançaram o SEQ pela renovação periódica, com os mesmos enlaces.</p>""")
 
     # H
     add(f"""<h3>Cenário H – Encaminhamento de DATA com TTL insuficiente</h3>
@@ -839,8 +846,11 @@ diminuindo a cada salto (16 → 15 → 14), e os logs registram o motivo de cada
     add("""<h2 class="scen">10. Decisões de implementação e limitações</h2>
 <p>Pontos em que a definição deixa a escolha ao grupo:</p>
 <table class="grid"><tr><th>Ponto</th><th>Decisão</th></tr>
-<tr><td>Limites dos campos</td><td>custo de 1 a 65535 (16 bits), SEQ de 1 a 2147483647 (inteiro de 32 bits com sinal)
-e TTL de 0 a 255, como na definição. Valores fora desses limites tornam a mensagem malformada.</td></tr>
+<tr><td>Limites dos campos</td><td>a definição fixa só o TTL (0 a 255) e que custos são inteiros positivos. O grupo
+adotou custo de 1 a 65535 (16 bits, como a métrica de interface do OSPF) e SEQ de 1 a 2147483647 (maior inteiro de
+32 bits com sinal, o <i>MaxSequenceNumber</i> do OSPF; a um LSA a cada 10 s levaria cerca de 680 anos para esgotar).
+Assim qualquer grupo, em qualquer linguagem, representa os valores sem estouro. Valores fora desses limites tornam
+a mensagem malformada.</td></tr>
 <tr><td>Empate no Dijkstra</td><td>sorteio entre os próximos saltos de mesmo custo; se o próximo salto anterior continua
 entre os melhores, ele é mantido, para a rota não aparecer como alterada sem motivo</td></tr>
 <tr><td>HELLO</td><td>aceito só se o <code>IP_ORIGEM</code> for o IP de onde veio o datagrama</td></tr>
