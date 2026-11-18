@@ -1,5 +1,5 @@
-Roteador 127.0.0.4 – UDP 6000 – pasta /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r4
-Log completo em /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r4/router.log. Digite help para os comandos.
+Roteador 127.0.0.4 – UDP 6000 – pasta resultados/roteadores/r4
+Log completo em resultados/roteadores/r4/router.log. Digite help para os comandos.
 21:07:10.117 | ROTEADOR_INICIADO | 127.0.0.4 | vizinhos configurados: ['127.0.0.2', '127.0.0.3', '127.0.0.5'] | último SEQ gravado=0
 21:07:10.118 | LSA_GERADO | 127.0.0.4 | SEQ=1 | inicialização | #127.0.0.4;1
 21:07:10.118 | LSDB_ATUALIZADA | 127.0.0.4 | LSA local: nova origem
@@ -497,8 +497,8 @@ TABELA DE ROTEAMENTO
 21:08:44.019 | LSA_DESCARTADO | 127.0.0.5 | SEQ=13 | duplicado (maior SEQ aceito=13) via 127.0.0.6
 
 21:08:44.227 | ROTEADOR_ENCERRADO | 127.0.0.4
-Roteador 127.0.0.4 – UDP 6000 – pasta /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r4
-Log completo em /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r4/router.log. Digite help para os comandos.
+Roteador 127.0.0.4 – UDP 6000 – pasta resultados/roteadores/r4
+Log completo em resultados/roteadores/r4/router.log. Digite help para os comandos.
 21:09:24.434 | ROTEADOR_INICIADO | 127.0.0.4 | vizinhos configurados: ['127.0.0.2', '127.0.0.3', '127.0.0.5', '127.0.0.6'] | último SEQ gravado=15
 21:09:24.435 | LSA_GERADO | 127.0.0.4 | SEQ=16 | inicialização | #127.0.0.4;16
 21:09:24.435 | LSDB_ATUALIZADA | 127.0.0.4 | LSA local: nova origem

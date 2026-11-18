@@ -1,5 +1,5 @@
-Roteador 127.0.0.6 – UDP 6000 – pasta /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r6
-Log completo em /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r6/router.log. Digite help para os comandos.
+Roteador 127.0.0.6 – UDP 6000 – pasta resultados/roteadores/r6
+Log completo em resultados/roteadores/r6/router.log. Digite help para os comandos.
 21:07:44.900 | ROTEADOR_INICIADO | 127.0.0.6 | vizinhos configurados: ['127.0.0.4', '127.0.0.5'] | último SEQ gravado=0
 21:07:44.900 | LSA_GERADO | 127.0.0.6 | SEQ=1 | inicialização | #127.0.0.6;1
 21:07:44.900 | LSDB_ATUALIZADA | 127.0.0.6 | LSA local: nova origem

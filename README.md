@@ -103,7 +103,7 @@ src/
   config.py     leitura/gravação do roteadores.txt
   seqstore.py   seq.txt (gravado antes de cada LSA enviado)
   logger.py     log na tela e no arquivo
-  settings.py   temporizadores, limites e políticas (pontos ambíguos da definição)
+  settings.py   temporizadores, limites e modo de desempate
 topologia/r1..r6  roteadores.txt da topologia de teste (192.168.1.1–6; ajuste aos IPs do laboratório)
 ```
 
@@ -115,12 +115,9 @@ topologia/r1..r6  roteadores.txt da topologia de teste (192.168.1.1–6; ajuste 
 
 Todo o estado do roteador fica protegido por um único `RLock` (`Router.lock`).
 
-### Políticas configuráveis (`src/settings.py`)
+### Desempate (`src/settings.py`)
 
-| Constante | Padrão (texto da definição) | Alternativa (pág. 7) |
-|---|---|---|
-| `ACEITAR_LSA_DE` | `"ativo"` | `"configurado"` |
-| `DESEMPATE` | `"aleatorio"` | `"menor_ip"` |
-| `SALTAR_SEQ_PROPRIA` | `False` | `True` |
-
-Com `"aleatorio"`, quando uma rota empatada é recalculada e o próximo salto anterior continua entre os melhores, ele é mantido. Assim a rota não aparece como "alterada" sem motivo.
+`DESEMPATE = "aleatorio"` sorteia entre os próximos saltos de mesmo custo, como pede a definição. Quando uma rota
+empatada é recalculada e o próximo salto anterior continua entre os melhores, ele é mantido, para a rota não aparecer
+como "alterada" sem motivo. `"menor_ip"` escolhe sempre o menor IP; os testes automatizados usam esse modo para ter
+um resultado previsível.

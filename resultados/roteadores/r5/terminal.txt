@@ -1,5 +1,5 @@
-Roteador 127.0.0.5 – UDP 6000 – pasta /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r5
-Log completo em /Users/marcoskaiser/Projects/PucRS/8-semestre/redes/trabalho_redes/resultados/roteadores/r5/router.log. Digite help para os comandos.
+Roteador 127.0.0.5 – UDP 6000 – pasta resultados/roteadores/r5
+Log completo em resultados/roteadores/r5/router.log. Digite help para os comandos.
 21:07:10.395 | ROTEADOR_INICIADO | 127.0.0.5 | vizinhos configurados: ['127.0.0.3', '127.0.0.4'] | último SEQ gravado=0
 21:07:10.396 | LSA_GERADO | 127.0.0.5 | SEQ=1 | inicialização | #127.0.0.5;1
 21:07:10.396 | LSDB_ATUALIZADA | 127.0.0.5 | LSA local: nova origem

@@ -16,7 +16,7 @@ LSA_MAX_AGE = 30            # LSA remoto expira 30 s após a última versão nov
 
 DEFAULT_TTL = 16            # TTL padrão das mensagens DATA
 
-# Limites dos campos (pág. 7 da definição; TTL 0-255 também está no texto principal)
+# Limites dos campos: TTL 0-255 vem da definição; custo (16 bits) e SEQ (inteiro de 32 bits com sinal) foram escolhidos pelo grupo
 MIN_COST, MAX_COST = 1, 65535
 MIN_SEQ, MAX_SEQ = 1, 2147483647
 MIN_TTL, MAX_TTL = 0, 255
@@ -30,20 +30,12 @@ LOG_FILE = "router.log"
 TICK_INTERVAL = 0.5
 
 # ---------------------------------------------------------------------------
-# Políticas para os pontos em que a definição é ambígua (ver PLANO.md §0).
-# Seguem o TEXTO PRINCIPAL da definição; trocar aqui se o professor decidir
-# pela versão da pág. 7.
+# Desempate entre caminhos de mesmo custo no Dijkstra:
+#   "aleatorio" – sorteia entre os próximos saltos empatados (pedido na definição)
+#   "menor_ip"  – escolhe o menor IP; usado nos testes automatizados para que
+#                 o resultado seja sempre o mesmo
 # ---------------------------------------------------------------------------
-
-# De quem aceitar LSA: "ativo" (texto principal) ou "configurado" (pág. 7)
-ACEITAR_LSA_DE = "ativo"
-
-# Desempate entre caminhos de mesmo custo: "aleatorio" (texto) ou "menor_ip" (pág. 7)
 DESEMPATE = "aleatorio"
-
-# Ao receber o próprio LSA com SEQ maior que o atual, pular a sequência?
-# Texto principal: não (sempre descarta). Pág. 7: sim.
-SALTAR_SEQ_PROPRIA = False
 
 # Exigir que o IP_ORIGEM do HELLO seja o IP de onde veio o datagrama
 EXIGIR_ORIGEM_HELLO_IGUAL_REMETENTE = True

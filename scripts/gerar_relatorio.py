@@ -48,6 +48,17 @@ def secs(t):
     return int(h) * 3600 + int(m) * 60 + float(rest)
 
 
+def snap_time(cid, name):
+    """Horário (HH:MM:SS.mmm) gravado na 1ª linha de resultados/<cid>/<name>.txt."""
+    with open(os.path.join(RES, cid, name + ".txt"), encoding="utf-8") as f:
+        return f.readline().rsplit(" – ", 1)[1].strip()
+
+
+def after(cid, name, t_event):
+    """Tempo real entre o evento e o instantâneo, ex.: "21 s"."""
+    return f"{secs(snap_time(cid, name)) - secs(t_event):.0f} s"
+
+
 def snap(cid, name, cmd=None):
     """Conteúdo de resultados/<cid>/<name>.txt; com `cmd`, só a saída daquele comando."""
     text = open(os.path.join(RES, cid, name + ".txt"), encoding="utf-8").read()
@@ -470,15 +481,13 @@ def build():
 <h1>Roteador Link State inspirado no OSPF</h1>
 <div class="sub">Fundamentos de Redes de Computadores – Trabalho Final – Relatório técnico</div>
 <table><tr><td><b>Integrantes</b></td><td>{members()}</td></tr>
-<tr><td><b>Linguagem</b></td><td>Python 3 (somente biblioteca padrão), sockets UDP na porta 6000</td></tr>
-<tr><td><b>Entregáveis</b></td><td>código-fonte (<code>src/</code>), este relatório e as capturas do Wireshark
-(<code>capturas/*.pcapng</code>)</td></tr></table>
+<tr><td><b>Linguagem</b></td><td>Python 3 (somente biblioteca padrão), sockets UDP na porta 6000</td></tr></table>
 <ol class="toc">
 <li>Arquitetura da solução</li><li>Estruturas de dados e temporizadores</li>
 <li>Protocolo: mensagens e validação</li><li>LSA, flooding, sincronização e expiração</li>
 <li>Implementação do Dijkstra</li><li>Encaminhamento de DATA e TTL</li>
 <li>Topologia de testes e ambiente de captura</li><li>Capturas do Wireshark</li>
-<li>Cenários A–H</li><li>Decisões nos pontos ambíguos e limitações</li><li>Como executar</li></ol>
+<li>Cenários A–H</li><li>Decisões de implementação e limitações</li><li>Como executar</li></ol>
 </div>""")
 
     # ---------------- 1. arquitetura ----------------
@@ -498,7 +507,7 @@ condições de corrida entre recepção, temporizadores e comandos.</p>
 <tr><td><code>transport.py</code></td><td>socket UDP e laço de recepção (<code>recvfrom</code> → <code>Router.handle_datagram</code>)</td></tr>
 <tr><td><code>seqstore.py</code>, <code>config.py</code></td><td>persistência do <code>seq.txt</code> (gravado antes de cada LSA) e do <code>roteadores.txt</code></td></tr>
 <tr><td><code>logger.py</code>, <code>views.py</code></td><td>log na tela e em <code>router.log</code>; tabelas de LSDB, rotas e vizinhos</td></tr>
-<tr><td><code>settings.py</code></td><td>temporizadores, limites e as políticas dos pontos ambíguos da definição</td></tr></table>
+<tr><td><code>settings.py</code></td><td>temporizadores, limites e modo de desempate</td></tr></table>
 <p><b>Fluxo de recepção.</b> O datagrama é decodificado em UTF-8 e validado; o primeiro caractere define o tipo
 (<code>@</code> HELLO, <code>#</code> LSA, <code>!</code> DATA). Mensagens malformadas, com mais de 1200 bytes
 ou terminadas em quebra de linha são descartadas e registradas (<code>MSG_DESCARTADA</code>). O remetente
@@ -598,7 +607,7 @@ R2 e R4 (k = 2): TTL 0 morre em R2, TTL 1 morre em R4 e TTL 2 chega a R5.</p>"""
 <p class="small" style="text-align:center">Cada número fica perto do roteador que o anuncia: é o custo no sentido
 <i>daquele roteador para o outro</i>. R1→R3 = 5 e R3→R1 = 7 (custo assimétrico). R6 e seus enlaces (tracejado)
 entram no cenário B.</p>
-<table class="grid"><tr><th>Roteador</th><th>IP no laboratório</th><th>IP nos testes</th><th>roteadores.txt</th></tr>
+<table class="grid"><tr><th>Roteador</th><th>IP de exemplo (rede real)</th><th>IP nos testes</th><th>roteadores.txt</th></tr>
 <tr><td>R1</td><td>192.168.1.1</td><td>127.0.0.1</td><td><code>.2;10</code> <code>.3;5</code></td></tr>
 <tr><td>R2</td><td>192.168.1.2</td><td>127.0.0.2</td><td><code>.1;10</code> <code>.4;2</code></td></tr>
 <tr><td>R3</td><td>192.168.1.3</td><td>127.0.0.3</td><td><code>.1;7</code> <code>.4;7</code> <code>.5;13</code></td></tr>
@@ -679,10 +688,10 @@ R1 aceitou mais {acc_after} LSAs de renovação sem nenhuma execução do Dijkst
 <div class="avoid"><p>LSDB e tabela de R1 após a convergência:</p>
 {term_html(snap("A", "convergida_R1", "lsdb"))}</div>
 {side_by_side(("R1", term_html(snap("A", "convergida_R1", "rotas"))),
-              ("R2", term_html(snap("A", "convergida_R2", "rotas"))),
-              ("R3", term_html(snap("A", "convergida_R3", "rotas"))))}
-{side_by_side(("R4", term_html(snap("A", "convergida_R4", "rotas"))),
-              ("R5", term_html(snap("A", "convergida_R5", "rotas"))))}""")
+              ("R2", term_html(snap("A", "convergida_R2", "rotas"))))}
+{side_by_side(("R3", term_html(snap("A", "convergida_R3", "rotas"))),
+              ("R4", term_html(snap("A", "convergida_R4", "rotas"))))}
+{side_by_side(("R5", term_html(snap("A", "convergida_R5", "rotas"))), ("", ""))}""")
 
     # B
     t_add = event_time("B", "add 127.0.0.6")
@@ -728,10 +737,12 @@ primeiro HELLO bidirecional.</div>
                  caption="LSA de R2 sem o enlace com 127.0.0.4 depois do down, e com ele de novo após o up")}
 {side_by_side(("R1 – tabela impressa após o down", highlight_table(terminal_table("R1", t_down))),
               ("R2 – tabela impressa após o down", highlight_table(terminal_table("R2", t_down))))}
-{side_by_side(("R2 – vizinhos 3 s após o down", term_html(snap("C", "t03s_R2", "vizinhos"))),
-              ("R4 – vizinhos 19 s após o down", term_html(snap("C", "t19s_R4", "vizinhos"))))}
+{side_by_side((f"R2 – vizinhos {after('C', 't03s_R2', t_down)} após o down", term_html(snap("C", "t03s_R2", "vizinhos"))),
+              (f"R4 – vizinhos {after('C', 't19s_R4', t_down)} após o down", term_html(snap("C", "t19s_R4", "vizinhos"))))}
 {side_by_side(("R1 – tabela após o up", term_html(snap("C", "depois_up_R1", "rotas"))),
-              ("R2 – tabela após o up", term_html(snap("C", "depois_up_R2", "rotas"))))}""")
+              ("R2 – tabela após o up", term_html(snap("C", "depois_up_R2", "rotas"))))}
+{side_by_side(("R1 – LSDB após a queda do enlace", term_html(snap("C", "t19s_lsdb_R1", "lsdb"))))}
+<p>O LSA de R2 (SEQ 11) passou a anunciar só 127.0.0.1;10, e o de R4 (SEQ 13) não lista mais 127.0.0.2.</p>""")
 
     # D
     t_kill = event_time("D", "encerrado com Ctrl+C")
@@ -741,17 +752,16 @@ declaram R4 inativo e anunciam LSAs sem ele. Os enlaces de R4 deixam de ser usad
 dos seus LSAs, mesmo com o LSA de R4 ainda na LSDB. 30 s após a última versão aceita, o LSA de R4 expira e é removido;
 o maior SEQ de R4 continua guardado. R4 some das tabelas.</div>
 <div class="box-obs"><b>Observado</b>R4 foi encerrado às {t_kill}. Cerca de 12 s depois (15 s após o último HELLO de
-R4) os vizinhos o declararam inativo e as rotas foram recalculadas: R1→R6 passou de 18 (via R4) para 21 (via
-R3→R5→R6), R1→R5 de 16 para 18 (via R3) e a rota para R4 foi removida. O LSA de R4 expirou em seguida, e a LSDB passou a mostrar
+R4) os vizinhos o declararam inativo e as rotas foram recalculadas: R1→R6 passou de 18 (caminho R1→R3→R4→R6) para 21 (R1→R3→R5→R6), com um passo intermediário de 19 quando R6 retirou o enlace com R4 antes dos demais, R1→R5 de 16 para 18 (via R3) e a rota para R4 foi removida. O LSA de R4 expirou em seguida, e a LSDB passou a mostrar
 "Origens expiradas: 127.0.0.4 SEQ=…".</div>
 {pre(logs("D", ["R1", "R2", "R3"], include="VIZINHO_INATIVO|LSA_EXPIRADO|ROTA_|LSDB_ATUALIZADA \\| 127.0.0.4", limit=26))}
-{wireshark_table("D_falha_roteador.pcapng", 'ip.src==127.0.0.4 || (linkstate.tipo=="LSA" && linkstate.enlace.vizinho!=127.0.0.4 && frame.time_relative > 13 && frame.time_relative < 18)', limit=18,
-                 caption="últimos pacotes enviados por R4 e, ~15 s depois, os primeiros LSAs dos vizinhos já sem o enlace com R4")}
-{side_by_side(("R1 – LSDB 5 s após a falha", term_html(snap("D", "t05s_R1", "lsdb"))),
-              ("R1 – LSDB 34 s após a falha", term_html(snap("D", "t34s_R1", "lsdb"))))}
-{side_by_side(("R1 – tabela 5 s após (inalterada)", term_html(snap("D", "t05s_R1", "rotas"))),
-              ("R1 – tabela 19 s após", term_html(snap("D", "t19s_R1", "rotas"))),
-              ("R2 – tabela 19 s após", term_html(snap("D", "t19s_R2", "rotas"))))}""")
+{wireshark_table("D_falha_roteador.pcapng", 'ip.src==127.0.0.4 || (linkstate.tipo=="LSA" && linkstate.origem == ip.src && linkstate.origem in {127.0.0.2, 127.0.0.3, 127.0.0.5, 127.0.0.6} && frame.time_relative > 11.5 && frame.time_relative < 12.5)', limit=20,
+                 caption="últimos LSAs repassados por R4 antes da falha e, cerca de 12 s depois, os primeiros LSAs gerados por R6, R3, R5 e R2 já sem o enlace com R4")}
+{side_by_side((f"R1 – LSDB {after('D', 't05s_R1', t_kill)} após a falha", term_html(snap("D", "t05s_R1", "lsdb"))),
+              (f"R1 – LSDB {after('D', 't34s_R1', t_kill)} após a falha", term_html(snap("D", "t34s_R1", "lsdb"))))}
+{side_by_side((f"R1 – tabela {after('D', 't05s_R1', t_kill)} após (inalterada)", term_html(snap("D", "t05s_R1", "rotas"))),
+              (f"R1 – tabela {after('D', 't19s_R1', t_kill)} após", term_html(snap("D", "t19s_R1", "rotas"))))}
+{side_by_side((f"R2 – tabela {after('D', 't19s_R2', t_kill)} após", term_html(snap("D", "t19s_R2", "rotas"))), ("", ""))}""")
 
     # E
     t_start = event_time("E", "R4 (127.0.0.4) iniciado")
@@ -786,7 +796,7 @@ flooding (o mesmo LSA chega por dois caminhos): só no cenário A foram {", ".jo
 descartes de duplicados.</div>
 {pre(logs("F", ["R1", "R2"], include="REENVIADO|LSA_DESCARTADO \\| 127.0.0.[15] \\| SEQ=(1|18|19) \\|.*via 127.0.0.1|LSA_ENCAMINHADO \\| 127.0.0.5 \\| SEQ=(1|18|19) ", start=t_f))}
 {wireshark_table("F_lsa_antigo_duplicado.pcapng", 'linkstate.tipo=="LSA" && ip.src==127.0.0.1 && ip.dst==127.0.0.2', limit=10,
-                 caption="os quatro LSAs de teste enviados por R1 a R2 (mesmos IPs e portas de um LSA normal; só o SEQ denuncia a cópia)")}
+                 caption="LSAs enviados por R1 a R2. Os de origem 127.0.0.5 (SEQ 19, 18 e 1) são de teste. O LSA de R1 com SEQ 18 aparece duas vezes: a primeira é a renovação periódica normal (aceita por R2); a segunda, 1 s depois, é o replay com o mesmo SEQ (descartado como duplicado)")}
 {side_by_side(("R2 – LSDB antes do teste", term_html(snap("F", "antes_R2", "lsdb"))),
               ("R2 – LSDB depois do teste", term_html(snap("F", "depois_R2", "lsdb"))))}
 <p>Exemplos de descarte natural de duplicados durante o flooding (cenário A):</p>
@@ -805,7 +815,10 @@ continua 10, então as rotas que chegam a R1 não mudam.</div>
 {wireshark_table("G_custo.pcapng", 'linkstate.tipo=="LSA" && linkstate.origem==127.0.0.1', limit=8,
                  caption="o novo LSA de R1 anuncia 127.0.0.2;1 e é repassado pelos vizinhos")}
 {side_by_side(("R1 – tabela impressa após a mudança", highlight_table(terminal_table("R1", t_g))),
-              ("R2 – tabela (inalterada)", term_html(snap("G", "depois_R2", "rotas"))))}""")
+              ("R2 – tabela (inalterada)", term_html(snap("G", "depois_R2", "rotas"))))}
+{side_by_side(("R2 – LSDB antes (fim do cenário F)", term_html(snap("F", "depois_R2", "lsdb"))),
+              ("R2 – LSDB depois da mudança", term_html(snap("G", "depois_lsdb_R2", "lsdb"))))}
+<p>Só a entrada de 127.0.0.1 mudou: SEQ 18 → 19 e o enlace 127.0.0.2;10 → 127.0.0.2;1.</p>""")
 
     # H
     add(f"""<h3>Cenário H – Encaminhamento de DATA com TTL insuficiente</h3>
@@ -815,7 +828,7 @@ decrementa o TTL: <code>ttl=0</code> é descartado em R2, <code>ttl=1</code> che
 na origem.</div>
 <div class="box-obs"><b>Observado</b>Os cinco envios se comportaram como esperado. A captura mostra o TTL do mesmo ID
 diminuindo a cada salto (16 → 15 → 14), e os logs registram o motivo de cada descarte no roteador certo. O texto com
-<code>;</code> foi entregue inteiro.</div>
+<code>;</code> foi entregue inteiro. A LSDB e as tabelas não mudam neste cenário; elas só são consultadas para encaminhar.</div>
 {pre(logs("H", ["R1", "R2", "R4", "R5"], include="DATA_"))}
 {wireshark_table("H_ttl.pcapng", 'linkstate.tipo=="DATA"', caption="todos os DATA: IPs e portas de cada salto e o TTL de cada datagrama")}
 {side_by_side(("R1 – tabela usada", term_html(snap("H", "rotas_R1", "rotas"))),
@@ -823,20 +836,18 @@ diminuindo a cada salto (16 → 15 → 14), e os logs registram o motivo de cada
               ("R4 – tabela", term_html(snap("H", "rotas_R4", "rotas"))))}""")
 
     # ---------------- 10. decisões ----------------
-    add("""<h2 class="scen">10. Decisões nos pontos ambíguos e limitações</h2>
-<p>A última página da definição traz "decisões para validar" que conflitam com o texto principal. O código segue o
-<b>texto principal</b> e deixa cada ponto como constante em <code>src/settings.py</code>, para trocar em uma linha
-conforme o combinado com o professor e os outros grupos:</p>
-<table class="grid"><tr><th>Ponto</th><th>Adotado (texto principal)</th><th>Alternativa (última página)</th><th>Constante</th></tr>
-<tr><td>Aceitação de LSA</td><td>só de vizinho ativo</td><td>de qualquer vizinho configurado</td><td><code>ACEITAR_LSA_DE</code></td></tr>
-<tr><td>Empate no Dijkstra</td><td>aleatório (mantendo a escolha anterior se ainda ótima)</td><td>menor IP</td><td><code>DESEMPATE</code></td></tr>
-<tr><td>Próprio LSA com SEQ maior</td><td>descartar</td><td>saltar a própria sequência</td><td><code>SALTAR_SEQ_PROPRIA</code></td></tr>
-<tr><td>Limites</td><td colspan="2">custo 1–65535, SEQ 1–2147483647, TTL 0–255 (não conflitam)</td><td><code>MIN/MAX_*</code></td></tr>
-<tr><td>TTL na origem</td><td colspan="2">não é decrementado; <i>k</i> intermediários exigem TTL ≥ <i>k</i></td><td>—</td></tr></table>
-<p>Para não perder a sincronização com "aceitar só de vizinho ativo", o roteador envia um HELLO imediato ao ativar
-uma vizinhança, antes dos LSAs; assim o outro lado já o considera ativo quando os LSAs chegam (visto nos cenários A, B e E).</p>
-<p>Outras decisões: HELLO só é aceito se <code>IP_ORIGEM</code> for o IP do remetente; LSA repassado é o datagrama
-original, sem alteração; a sincronização envia também o próprio LSA (gerado no mesmo instante).</p>
+    add("""<h2 class="scen">10. Decisões de implementação e limitações</h2>
+<p>Pontos em que a definição deixa a escolha ao grupo:</p>
+<table class="grid"><tr><th>Ponto</th><th>Decisão</th></tr>
+<tr><td>Limites dos campos</td><td>custo de 1 a 65535 (16 bits), SEQ de 1 a 2147483647 (inteiro de 32 bits com sinal)
+e TTL de 0 a 255, como na definição. Valores fora desses limites tornam a mensagem malformada.</td></tr>
+<tr><td>Empate no Dijkstra</td><td>sorteio entre os próximos saltos de mesmo custo; se o próximo salto anterior continua
+entre os melhores, ele é mantido, para a rota não aparecer como alterada sem motivo</td></tr>
+<tr><td>HELLO</td><td>aceito só se o <code>IP_ORIGEM</code> for o IP de onde veio o datagrama</td></tr>
+<tr><td>Flooding</td><td>o LSA é repassado como o datagrama original, sem alteração</td></tr>
+<tr><td>Sincronização</td><td>ao formar a vizinhança, o roteador envia um HELLO imediato e só depois os LSAs (o próprio,
+recém-gerado, e todos os outros válidos da LSDB). Como um LSA só é aceito de vizinho ativo, o HELLO imediato faz o
+outro lado ativar a vizinhança antes de os LSAs chegarem (visto nos cenários A, B e E).</td></tr></table>
 <p><b>Limitações.</b> (1) Os cenários deste relatório foram executados numa única máquina, com IPs de loopback; a
 lógica e o formato na rede são os mesmos usados entre computadores, mas a demonstração em quatro ou mais
 computadores e o teste de interoperabilidade com outros grupos são feitos no laboratório. (2) Como pede a

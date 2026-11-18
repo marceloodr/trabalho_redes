@@ -9,7 +9,7 @@ from dijkstra import Route, build_graph, compute_routes, diff_routes  # noqa: E4
 
 R1, R2, R3, R4, R5 = (f"10.0.0.{i}" for i in range(1, 6))
 
-# Topologia do PLANO.md (custos por direção)
+# Topologia de teste (custos por direção)
 TOPOLOGY = {
     R1: {R2: 10, R3: 5},
     R2: {R1: 10, R4: 2},

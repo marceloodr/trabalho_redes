@@ -41,7 +41,7 @@ class Neighbor:
 class Router:
     def __init__(self, my_ip, neighbors, base_dir=".", logger=None, out=print,
                  clock=time.monotonic, wall_clock=time.time, rng=None,
-                 tie_break=None, accept_lsa_from=None, color=False):
+                 tie_break=None, color=False):
         self.my_ip = my_ip
         self.neighbors = {ip: Neighbor(cost) for ip, cost in neighbors.items()}
         self.lsdb = LSDB()
@@ -59,7 +59,6 @@ class Router:
         self.wall_clock = wall_clock     # hora de parede (exibição)
         self.rng = rng or random.Random()
         self.tie_break = tie_break or settings.DESEMPATE
-        self.accept_lsa_from = accept_lsa_from or settings.ACEITAR_LSA_DE
         self.color = color
         self.sender = None               # função (ip, bytes) -> None, ligada depois
 
@@ -181,14 +180,10 @@ class Router:
             return self._drop_lsa(lsa, f"recebido de {sender_ip}, que não é vizinho configurado")
         if not n.enabled:
             return self._drop_lsa(lsa, f"enlace com {sender_ip} desativado")
-        if self.accept_lsa_from == "ativo" and not n.active:
+        if not n.active:
             return self._drop_lsa(lsa, f"recebido de {sender_ip}, que não é vizinho ativo")
 
         if lsa.origin == self.my_ip:
-            if settings.SALTAR_SEQ_PROPRIA and lsa.seq > self.my_seq:
-                self.log("SEQ_SALTADA", self.my_ip, f"recebido próprio LSA {seq_txt} > {self.my_seq}")
-                self.my_seq = lsa.seq
-                self._originate_lsa("salto de sequência")
             return self._drop_lsa(lsa, f"LSA com o próprio IP de origem (via {sender_ip})")
 
         status = self.lsdb.check(lsa.origin, lsa.seq)

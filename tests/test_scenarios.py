@@ -13,7 +13,7 @@ import seqstore  # noqa: E402
 
 R1, R2, R3, R4, R5, R6 = (f"10.0.0.{i}" for i in range(1, 7))
 
-# Topologia do PLANO.md: custo de cada roteador até cada vizinho
+# Topologia de teste: custo de cada roteador até cada vizinho
 CONFIG = {
     R1: {R2: 10, R3: 5},
     R2: {R1: 10, R4: 2},
