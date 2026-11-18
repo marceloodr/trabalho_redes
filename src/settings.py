@@ -16,7 +16,13 @@ LSA_MAX_AGE = 30            # LSA remoto expira 30 s após a última versão nov
 
 DEFAULT_TTL = 16            # TTL padrão das mensagens DATA
 
-# Limites dos campos: TTL 0-255 vem da definição; custo (16 bits) e SEQ (inteiro de 32 bits com sinal) foram escolhidos pelo grupo
+# Limites dos campos (fora deles a mensagem é malformada):
+#   TTL 0-255: definido pela especificação.
+#   Custo 1-65535: a especificação só exige inteiro positivo; adotamos 16 bits,
+#     como a métrica de interface do OSPF (RFC 2328).
+#   SEQ 1-2147483647: maior inteiro de 32 bits com sinal, o MaxSequenceNumber
+#     do OSPF; a um LSA a cada 10 s levaria ~680 anos para esgotar.
+#   Com esses tetos, qualquer grupo (Java, C, ...) representa os valores sem estouro.
 MIN_COST, MAX_COST = 1, 65535
 MIN_SEQ, MAX_SEQ = 1, 2147483647
 MIN_TTL, MAX_TTL = 0, 255
